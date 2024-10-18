@@ -28,7 +28,7 @@ impl Default for Person {
 // Person::from("Mark,20")` to compile Please note that you'll need to parse the
 // age component into a `usize` with something like `"4".parse::<usize>()`. The
 // outcome of this needs to be handled appropriately.
-//
+
 // Steps:
 // 1. If the length of the provided string is 0, then return the default of
 //    Person.
@@ -40,10 +40,44 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
+// 你的任务是完成以下实现，使得代码 let p = Person::from("Mark,20") 能够编译。
+// 请注意，你需要将年龄部分解析为 usize，可以使用类似于 "4".parse::<usize>() 的方法。
+// 解析的结果需要适当地处理。
+
+// 如果提供的字符串长度为 0，则返回 Person 的默认值。
+// 通过逗号将给定字符串分割。
+// 从分割操作中提取第一个元素，作为名称使用。
+// 如果名称为空，则返回 Person 的默认值。
+// 从分割操作中提取另一个元素，并将其解析为 usize 类型的年龄。
+// 如果解析年龄时出现错误，则返回 Person 的默认值。否则，返回一个包含解析结果的 Person 对象。
+
+
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.is_empty() {
+            return Person::default();
+        }
+        let parts:Vec<&str> = s.split(',').collect();
+        if parts.len() != 2 {
+            return Person::default()
+        }
+
+        let name = parts[0].trim();
+        let age_str = parts[1].trim();
+
+        if name.is_empty(){
+            return Person::default()
+        }
+
+        if let Ok(age) = age_str.parse::<usize>() {
+            Person {
+                name:name.to_string(),
+                age,
+            }
+        }else {
+            Person::default()
+        }
     }
 }
 
