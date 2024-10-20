@@ -44,6 +44,7 @@ pub trait Graph {
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
         //TODO
+        
         let (from, to, weight) = edge;
         let from_node = from.to_string();
         let to_node = to.to_string();
