@@ -34,6 +34,7 @@ pub trait Graph {
     fn adjacency_table(&self) -> &HashMap<String, Vec<(String, i32)>>;
     fn add_node(&mut self, node: &str) -> bool {
         //TODO
+        
 		let node_string = node.to_string();
         if self.adjacency_table().contains_key(&node_string) {
             false
